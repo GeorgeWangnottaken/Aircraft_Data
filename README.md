@@ -1,3 +1,5 @@
 # Aircraft Data
 
-Aircraft sensor system firmaware, meant to run on STM32s
+Aircraft sensor system firmware, meant to run on STM32s
+
+hi savo

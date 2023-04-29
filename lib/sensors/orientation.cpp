@@ -7,17 +7,17 @@ uint16_t BNO055_SAMPLERATE_DELAY_MS = 100;
 // Check I2C device address and correct line below (by default address is 0x29 or 0x28)
 //                                   id, address
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
-
+  //could  be in setup function
 
 //Need info: pitch roll heading
 //heading v yaw??
-float pitch=-1;
-float roll=-1;
-float heading=-1;
+float pitch=-1; //pitch degrees
+float roll=-1;  //roll degrees
+float heading=-1;//yaw degrees
 
 void orientation_measure(){//unneeded wrapper function
   sensors_event_t orientationData;
-  bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);//get orientation
+  bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);//get orientation, euler vectors ok up to 45 degrees
   pitch=orientationData.orientation.pitch;
   roll=orientationData.orientation.z;
   heading=orientationData.orientation.x;//some issues with the .heading, .pitch stuff
@@ -25,64 +25,6 @@ void orientation_measure(){//unneeded wrapper function
 }
 
 
-void setup(void)
-{
-  Serial.begin(9600);//for bluetooth
-
-  while (!Serial) delay(10);  // wait for serial port to open!
-
-  Serial.println("Orientation Sensor Test"); Serial.println("");
-
-  /* Initialise the sensor */
-  if (!bno.begin())
-  {
-    /* There was a problem detecting the BNO055 ... check your connections */
-    Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
-    while (1);
-  }
-  orientation_measure();
-  Serial.print("Wrapper function test:\n h:");
-  Serial.print(heading);
-  Serial.print(", pitch:");
-  Serial.print(pitch);
-  Serial.print(", roll:");
-  Serial.print(roll);
-
-
-  delay(1000);
-}
-
-void loop(void)
-{
-  //could add VECTOR_ACCELEROMETER, VECTOR_MAGNETOMETER,VECTOR_GRAVITY...
-  sensors_event_t orientationData;
-    // , angVelocityData , linearAccelData, magnetometerData, accelerometerData, gravityData;
-  bno.getEvent(&orientationData, Adafruit_BNO055::VECTOR_EULER);
-  // bno.getEvent(&angVelocityData, Adafruit_BNO055::VECTOR_GYROSCOPE);
-  // bno.getEvent(&linearAccelData, Adafruit_BNO055::VECTOR_LINEARACCEL);
-  // bno.getEvent(&magnetometerData, Adafruit_BNO055::VECTOR_MAGNETOMETER);
-  // bno.getEvent(&accelerometerData, Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  // bno.getEvent(&gravityData, Adafruit_BNO055::VECTOR_GRAVITY);
-
-  Serial.print("h: ");
-  Serial.print(orientationData.orientation.x);//direct print
-  Serial.print(",  p: ");
-  Serial.print(orientationData.orientation.pitch);
-  Serial.print(",  r: ");//tabs suck in b
-  Serial.print(orientationData.orientation.z);
-  Serial.print("\n");
-
-
-  int8_t boardTemp = bno.getTemp(); //extra temp sensor :O
-  //Serial.println();
-  //Serial.print(F("temperature: "));
-  //Serial.println(boardTemp);
-
-  uint8_t system, gyro, accel, mag = 0;
-
-  // Serial.println("--");
-  delay(BNO055_SAMPLERATE_DELAY_MS);
-}
 
 /* This driver uses the Adafruit unified sensor library (Adafruit_Sensor),
    which provides a common 'type' for sensor data and some helper functions.
@@ -111,5 +53,3 @@ void loop(void)
    =======
    2015/MAR/03  - First release (KTOWN)
 */
-
-/* Set the delay between fresh samples */

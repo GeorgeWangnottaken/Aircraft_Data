@@ -1,5 +1,5 @@
 #include <Arduino.h>//see https://docs.platformio.org/en/latest/integration/ide/vscode.html#quick-start
-#include "Altitude_dps310_no_pressure.h"
+#include "pressure.h"
 #include "led.h"
 //used in arduino
 
@@ -15,6 +15,8 @@ void loop() {
   printf("placeholder");
   LED_blink();
 
+  //try get measure
+  pressureCheck();
 }//see stuff here
 
 /*

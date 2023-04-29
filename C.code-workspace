@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "../../../../OneDrive - University of Toronto/classes/C"
+		},
+		{
+			"name": "Aircraft_Data",
+			"path": "."
+		},
+		{
+			"name": "titan",
+			"path": "../titan_2022-main/Microcontroller Code/titan"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string.h": "c",
+			"istream": "cpp"
+		}
+	}
+}

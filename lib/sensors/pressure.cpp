@@ -3,7 +3,7 @@
 
 #include "pressure.h"
 
-//debug to figure out how to include this
+//debug to figure out how to include this, maybe use setup function
 Adafruit_DPS310 dps;
 
 // Can also use SPI!
